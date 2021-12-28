@@ -17,10 +17,12 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "ec2-iac-site" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
+  subnet_id = aws_subnet.mackenzie_subnet_site.id
   vpc_security_group_ids = [aws_security_group.sg_ec2_ports_allow.id]
+  associate_public_ip_address = "true"
 
   tags = {
-    name = "ec2-iac-site"
+    Name = "ec2-iac-site"
     Ambiente = "Development"
     Time = "Mackenzie"
     Aplicacao = "Site"
