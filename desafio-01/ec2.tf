@@ -17,8 +17,10 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "ec2-iac-site" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.sg_ec2_ports_allow.id]
 
   tags = {
+    name = "ec2-iac-site"
     Ambiente = "Development"
     Time = "Mackenzie"
     Aplicacao = "Site"

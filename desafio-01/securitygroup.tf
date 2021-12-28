@@ -8,11 +8,11 @@ resource "aws_security_group" "sg_ec2_ports_allow" {
   name = "ec2_sg_desafio"
   description = "SG EC2 site"
   vpc_id = aws_vpc.mackenzie_vpc_site.id
-  dynamic "ingress" {
+  dynamic "ingress" { 
     for_each = var.sg_ec2_iac_site
     content {
-      from_port   = ingress.key
-      to_port     = ingress.key
+      from_port   = ingress.value
+      to_port     = ingress.value
       cidr_blocks = ["0.0.0.0/0"]
       protocol    = "tcp"
     }
@@ -21,8 +21,8 @@ resource "aws_security_group" "sg_ec2_ports_allow" {
   dynamic "egress" {
     for_each = var.sg_ec2_iac_site
     content {
-      from_port   = egress.key
-      to_port     = egress.key
+      from_port   = egress.value
+      to_port     = egress.value
       cidr_blocks = ["0.0.0.0/0"]
       protocol    = "tcp"
     }
