@@ -14,7 +14,7 @@ resource "aws_route_table" "route_table_site" {
   vpc_id = aws_vpc.mackenzie_vpc_site.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block = var.cidr_block
     gateway_id = aws_internet_gateway.gw_site.id
   }
 
